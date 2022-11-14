@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somnia", "Somnia\Somnia.csproj", "{EAF19FC8-0730-4375-860C-8656A1764B73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAF19FC8-0730-4375-860C-8656A1764B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF19FC8-0730-4375-860C-8656A1764B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF19FC8-0730-4375-860C-8656A1764B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF19FC8-0730-4375-860C-8656A1764B73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
