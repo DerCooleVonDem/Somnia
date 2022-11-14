@@ -15,6 +15,7 @@ public class TokenManager
         AddToken(new ExitToken());
         AddToken(new RunToken());
         AddToken(new IfToken());
+        AddToken(new IfNotToken());
     }
     
     public void AddToken(Token token)
@@ -27,15 +28,26 @@ public class TokenManager
         Tokens.Remove(token);
     }
 
-    public bool RunToken(string id, string body, int line, string where)
+    public bool RunToken(string body, int line, string where)
     {
+        List<Token> foundMatches = new List<Token>();
+        body = body.Trim();
         foreach (Token token in Tokens)
         {
-            if (token.ID == id)
+            if (body.StartsWith(token.ID))
             {
-                return token.Run(body, line, where);
+                foundMatches.Add(token);
             }
         }
+        
+        if(foundMatches.Count >= 1)
+        {
+            foundMatches.Sort((x, y) => x.ID.Length.CompareTo(y.ID.Length));
+            foundMatches.Reverse();
+            body = body.Replace(foundMatches[0].ID, "");
+            return foundMatches[0].Run(body, line, where);
+        }
+
         new SyntaxError().Throw("Unknown token", line, where);
         return false;
     }

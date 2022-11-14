@@ -26,23 +26,10 @@ public class Interpreter
     
     public bool ExecLine(string line, int lineNum, string where)
     {
-        //Split the id and the body
-        //Example: PRINT "Hello World"
-        //id = PRINT
-        //body = "Hello World"
-        string id = line.Split(' ')[0];
-        string body = "";
-        if(id.Length + 1 < line.Length)
-        {
-            body = line.Substring(id.Length + 1);
-        }
-
-
-        if (!TokenManager.RunToken(id, body, lineNum, where))
+        if (!TokenManager.RunToken(line, lineNum, where))
         {
             Environment.Exit(1);
         }
-        
         return true;
     }
 

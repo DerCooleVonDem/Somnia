@@ -1,7 +1,7 @@
 print "Starting the Test.som File"
 
 
-if 1 == 1
+if not "India" == "Jonas"
 
 run "./Test.som"
 exit
