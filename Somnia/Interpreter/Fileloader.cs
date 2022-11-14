@@ -7,7 +7,8 @@ public class Fileloader
 
     public string Path;
     public string FileContent;
-    
+    public List<int> skipLines = new List<int>();
+
     public Fileloader(string path)
     {
         //if the path is a directory, load the first file named Start.som
@@ -22,17 +23,25 @@ public class Fileloader
         }
         //load the file
         FileContent = File.ReadAllText(path);
-        CleanFile();
+        ScanFile();
         Path = path;
     }
 
-    public void CleanFile()
+    public void ScanFile()
     {
-        // Remove all comments 
-        // Valid Comment: # This is a comment
-        FileContent = Regex.Replace(FileContent, @"#.*", "");
-        //remove empty lines
-        FileContent = Regex.Replace(FileContent, @"^\s*$\n", "", RegexOptions.Multiline);
+        string[] lines  = GetLines();
+        
+        //remove comments and empty lines
+        //Valid comment: # comment
+        
+        for (int i = 0; i < lines.Length; i++)
+        {
+            string line = lines[i];
+            if (line.Trim().StartsWith("#") || line == "")
+            {
+                skipLines.Add(i);
+            }
+        }
     }
 
     public string[] GetLines()
@@ -40,6 +49,11 @@ public class Fileloader
         return FileContent.Split("\n");
     }
     
+    public bool SkipLine(int line)
+    {
+        return skipLines.Contains(line);
+    }
+
     public string GetPath()
     {
         return Path;

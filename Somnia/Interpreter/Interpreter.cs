@@ -9,11 +9,19 @@ public class Interpreter
     public Fileloader Fileloader;
     public TokenManager TokenManager;
     
+    public static Interpreter Instance;
+    
     public Interpreter(string path)
     {
         Path = path;
         Fileloader = new Fileloader(path);
         TokenManager = new TokenManager();
+        Instance = this;
+    }
+    
+    public static Interpreter GetInstance()
+    {
+        return Instance;
     }
     
     public bool ExecLine(string line, int lineNum, string where)
@@ -23,7 +31,12 @@ public class Interpreter
         //id = PRINT
         //body = "Hello World"
         string id = line.Split(' ')[0];
-        string body = line.Substring(id.Length + 1);
+        string body = "";
+        if(id.Length + 1 < line.Length)
+        {
+            body = line.Substring(id.Length + 1);
+        }
+
 
         if (!TokenManager.RunToken(id, body, lineNum, where))
         {
@@ -33,30 +46,46 @@ public class Interpreter
         return true;
     }
 
+    public string[] lines = new string[0];
+    
+    public int currentLine = 0;
+    public bool gotGoto = false;
+
     public void Run()
     {
-        string[] lines = Fileloader.GetLines();
-        
-        int currentLine = 0;
+
+        lines = Fileloader.GetLines();
+
         //Debug Lines
         //While there are lines to read
         while (currentLine < lines.Length)
         {
+            
+            if(Fileloader.SkipLine(currentLine)) { currentLine++; continue; }
+            
+            gotGoto = false;
+            
             //Read the line
             string line = lines[currentLine];
-            //If the line is not empty
-            if (line != "")
-            {
-                //If the line is not a comment
-                if (line[0] != '#')
-                {
-                    //Execute the line
-                    ExecLine(line, currentLine, Fileloader.GetPath());
-                }
-            }
+
+            //TODO: Fix line index (cleaned / uncleaned)
+            //Execute the line
+            ExecLine(line, currentLine, Fileloader.GetPath());
+
             //Go to the next line
-            currentLine++;
+            if(!gotGoto) currentLine++;
         }
     }
     
+    public void GotoLine(int line)
+    {
+
+        if (line == -1)
+        {
+            Environment.Exit(0);    
+        }
+        
+        currentLine = line;
+        gotGoto = true;
+    }
 }
