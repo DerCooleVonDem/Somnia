@@ -5,14 +5,15 @@ namespace Somnia.Interpreter;
 public class Fileloader
 {
 
-    public string fileContent;
+    public string Path;
+    public string FileContent;
     
     public Fileloader(string path)
     {
         //if the path is a directory, load the first file named Start.som
         if (Directory.Exists(path))
         {
-            path = Path.Combine(path, "Start.som");
+            path = System.IO.Path.Combine(path, "Start.som");
         }
         //if the file doesn't exist, throw an exception
         if (!File.Exists(path))
@@ -20,21 +21,27 @@ public class Fileloader
             throw new FileNotFoundException("File not found", path);
         }
         //load the file
-        fileContent = File.ReadAllText(path);
+        FileContent = File.ReadAllText(path);
         CleanFile();
+        Path = path;
     }
 
     public void CleanFile()
     {
         // Remove all comments 
         // Valid Comment: # This is a comment
-        fileContent = Regex.Replace(fileContent, @"#.*", "");
+        FileContent = Regex.Replace(FileContent, @"#.*", "");
         //remove empty lines
-        fileContent = Regex.Replace(fileContent, @"^\s*$\n", "", RegexOptions.Multiline);
+        FileContent = Regex.Replace(FileContent, @"^\s*$\n", "", RegexOptions.Multiline);
     }
 
     public string[] GetLines()
     {
-        return fileContent.Split("\n");
+        return FileContent.Split("\n");
+    }
+    
+    public string GetPath()
+    {
+        return Path;
     }
 }
