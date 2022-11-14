@@ -1,0 +1,7 @@
+# Copyright Jonas Fabian Windmann 2022. All rights reserved.
+
+print "Hello World"
+print "Hello Again"
+print "I like typing this."
+print "This is fun."
+print 'Yay! Printing.'
