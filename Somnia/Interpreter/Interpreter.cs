@@ -50,6 +50,8 @@ public class Interpreter
     
     public int currentLine = 0;
     public bool gotGoto = false;
+    
+    public bool skipToNextBreak = false;
 
     public void Run()
     {
@@ -67,6 +69,19 @@ public class Interpreter
             
             //Read the line
             string line = lines[currentLine].Trim();
+            
+            if(skipToNextBreak && line != "break")
+            {
+                currentLine++;
+                continue;
+            }
+            
+            if(line == "break")
+            {
+                skipToNextBreak = false;
+                currentLine++;
+                continue;
+            }
             
             //Execute the line
             ExecLine(line, currentLine, Fileloader.GetPath());
@@ -86,5 +101,10 @@ public class Interpreter
         
         currentLine = line;
         gotGoto = true;
+    }
+    
+    public void SkipToNextBreak()
+    {
+        skipToNextBreak = true;
     }
 }

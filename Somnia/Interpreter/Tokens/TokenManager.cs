@@ -14,6 +14,7 @@ public class TokenManager
         AddToken(new GotoToken());
         AddToken(new ExitToken());
         AddToken(new RunToken());
+        AddToken(new IfToken());
     }
     
     public void AddToken(Token token)

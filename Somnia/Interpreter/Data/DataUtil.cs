@@ -7,6 +7,9 @@ public class DataUtil
 
     public static int IdentifyDataType(string data)
     {
+        
+        data = data.Trim();
+
         //check if the data is surrounded by quotes
         if (data.StartsWith("\"") && data.EndsWith("\"") || data.StartsWith("'") && data.EndsWith("'"))
         {
@@ -30,14 +33,12 @@ public class DataUtil
     
     public static string ToString(string data)
     {
+
+        data = data.Trim();
+        
         if(IdentifyDataType(data) != STRING) return "";
         
-        if (data.StartsWith("\"") && data.EndsWith("\"") || data.StartsWith("'") && data.EndsWith("'"))
-        {
-            return data.Substring(1, data.Length - 2);
-        }
-
-        return data;
+        return data.Substring(1, data.Length - 2);
     }
     
     public static int ToInt(string data)
