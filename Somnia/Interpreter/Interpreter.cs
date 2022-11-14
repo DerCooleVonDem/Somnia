@@ -66,9 +66,8 @@ public class Interpreter
             gotGoto = false;
             
             //Read the line
-            string line = lines[currentLine];
-
-            //TODO: Fix line index (cleaned / uncleaned)
+            string line = lines[currentLine].Trim();
+            
             //Execute the line
             ExecLine(line, currentLine, Fileloader.GetPath());
 

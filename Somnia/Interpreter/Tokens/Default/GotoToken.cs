@@ -12,7 +12,7 @@ public class GotoToken : Token
     {
         if (DataUtil.IdentifyDataType(body) == INT)
         {
-            Interpreter.GetInstance().GotoLine(DataUtil.ToInt(body));
+            Interpreter.GetInstance().GotoLine(DataUtil.ToInt(body) - 1);
             return true;
         }
         

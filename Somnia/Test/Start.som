@@ -1,1 +1,2 @@
+print "Starting the Test.som File"
 run "./Test.som"
