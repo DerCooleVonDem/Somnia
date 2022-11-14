@@ -11,7 +11,7 @@ public class PrintToken : Token
     {
         if (DataUtil.IdentifyDataType(body) == DataTypes.STRING)
         {
-            Console.WriteLine(DataUtil.ToPrintable(body));
+            Console.WriteLine(DataUtil.ToString(body));
             return true;
         }
         

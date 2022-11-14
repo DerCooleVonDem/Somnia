@@ -20,7 +20,7 @@ public class DataUtil
         return DataTypes.INVALID;
     }
     
-    public static string ToPrintable(string data)
+    public static string ToString(string data)
     {
         if(IdentifyDataType(data) != DataTypes.STRING) return "";
         
@@ -55,5 +55,21 @@ public class DataUtil
             default:
                 return "unknown";
         }
+    }
+    
+    public static string FromRelativePath(string originPath, string path)
+    {
+        if (path.StartsWith("./"))
+        {
+            path = path.Substring(2);
+            
+            //remove the file from the origin path
+            originPath = originPath.Substring(0, originPath.LastIndexOf("/"));
+            
+            //add the relative path to the origin path
+            return originPath + "/" + path;
+        }
+
+        return path;
     }
 }

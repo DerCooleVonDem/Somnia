@@ -13,6 +13,7 @@ public class TokenManager
         AddToken(new PrintToken());
         AddToken(new GotoToken());
         AddToken(new ExitToken());
+        AddToken(new RunToken());
     }
     
     public void AddToken(Token token)
