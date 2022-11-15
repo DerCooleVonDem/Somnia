@@ -1,4 +1,5 @@
 using Somnia.Interpreter.Tokens;
+using Somnia.Interpreter.Variable;
 
 namespace Somnia.Interpreter;
 
@@ -8,6 +9,7 @@ public class Interpreter
     public string Path;
     public Fileloader Fileloader;
     public TokenManager TokenManager;
+    public VariablePool VariablePool;
     
     public static Interpreter Instance;
     
@@ -16,6 +18,7 @@ public class Interpreter
         Path = path;
         Fileloader = new Fileloader(path);
         TokenManager = new TokenManager();
+        VariablePool = new VariablePool();
         Instance = this;
     }
     

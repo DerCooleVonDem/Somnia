@@ -8,7 +8,8 @@ public class DataEvaluator
 
     public static bool? IfEvaluation(string body, int line, string where)
     {
-        if (DataUtil.IdentifyDataType(body) == BOOL)
+        int type = DataUtil.IdentifyDataType(body);
+        if (type == BOOL)
         {
             return DataUtil.ToBool(body);
         }
@@ -19,6 +20,29 @@ public class DataEvaluator
         //compare the two sides
         int dataTypeLeft = DataUtil.IdentifyDataType(split[0]);
         int dataTypeRight = DataUtil.IdentifyDataType(split[1]);
+
+        if (dataTypeLeft == VARIABLE)
+        {
+            string? unparsed = DataUtil.FromVariable(split[0].Trim());
+            if (unparsed == null)
+            {
+                new SyntaxError().Throw("Variable " + split[0] + " is not defined", line, where);
+                return null;
+            }
+            dataTypeLeft = DataUtil.IdentifyDataType(unparsed);
+            split[0] = unparsed;
+        }
+        if (dataTypeRight == VARIABLE)
+        {
+            string? unparsed = DataUtil.FromVariable(split[1].Trim());
+            if (unparsed == null)
+            {
+                new SyntaxError().Throw("Variable " + split[1] + " is not defined", line, where);
+                return null;
+            }
+            dataTypeRight = DataUtil.IdentifyDataType(unparsed);
+            split[1] = unparsed;
+        }
         
         //if not the same type, return false
         if (dataTypeLeft != dataTypeRight)

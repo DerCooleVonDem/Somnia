@@ -10,7 +10,6 @@ public class IfToken : Token
 
     public override bool Run(string body, int line, string where)
     {
-        
         bool? result = DataEvaluator.IfEvaluation(body, line, where);
         if(result == null)
         {

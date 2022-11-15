@@ -1,3 +1,4 @@
+using Somnia.Interpreter.Variable;
 using static Somnia.Interpreter.Data.DataTypes;
 
 namespace Somnia.Interpreter.Data;
@@ -28,6 +29,11 @@ public class DataUtil
             return BOOL;
         }
 
+        if(VariablePool.GetInstance().GetVariable(data) != null)
+        {
+            return VARIABLE;
+        }
+        
         return INVALID;
     }
     
@@ -65,6 +71,13 @@ public class DataUtil
         return false;
     }
     
+    public static string? FromVariable(string data)
+    {
+        if(IdentifyDataType(data) != VARIABLE) return null;
+        
+        return VariablePool.GetInstance().GetVariable(data);
+    }
+
     public static string DataTypeToString(int dataType)
     {
         switch (dataType)
@@ -75,6 +88,8 @@ public class DataUtil
                 return "int";
             case BOOL:
                 return "bool";
+            case VARIABLE:
+                return "variable";
             case INVALID:
                 return "invalid";
             default:

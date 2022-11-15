@@ -1,11 +1,9 @@
-print "Starting the Test.som File"
+var india = "verliebt"
+var jonas = "verliebt"
 
-
-if not "India" == "Jonas"
-
-run "./Test.som"
-exit
-
+if india == jonas
+    print "India und Jonas sind verliebt"
+    exit
 break
 
-print "Could not start!"
+print "India und Jonas sind nicht verliebt"

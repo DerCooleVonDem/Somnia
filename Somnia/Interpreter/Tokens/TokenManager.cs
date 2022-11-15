@@ -16,6 +16,7 @@ public class TokenManager
         AddToken(new RunToken());
         AddToken(new IfToken());
         AddToken(new IfNotToken());
+        AddToken(new VarToken());
     }
     
     public void AddToken(Token token)
@@ -45,6 +46,7 @@ public class TokenManager
             foundMatches.Sort((x, y) => x.ID.Length.CompareTo(y.ID.Length));
             foundMatches.Reverse();
             body = body.Replace(foundMatches[0].ID, "");
+            body = body.Trim();
             return foundMatches[0].Run(body, line, where);
         }
 
