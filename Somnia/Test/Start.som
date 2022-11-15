@@ -1,8 +1,11 @@
 var india = "verliebt"
 var jonas = "verliebt"
 
+var fileToRun = "./Test.som"
+
 if india == jonas
     print "India und Jonas sind verliebt"
+    run fileToRun
     exit
 break
 
