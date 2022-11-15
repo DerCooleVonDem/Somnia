@@ -1,0 +1,17 @@
+var india = "verliebt"
+var jonas = "verliebt"
+
+input check -> "Sollen wir das überprüfen?"
+
+if india == jonas
+
+    if check == "Ja"
+        print "India und Jonas sind verliebt"
+        exit
+    break
+    
+    print "Wir überprüfen nicht ob India und Jonas verliebt sind"
+    exit
+break
+
+print "India und Jonas sind nicht verliebt"

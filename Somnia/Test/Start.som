@@ -1,12 +1,10 @@
-var india = "verliebt"
-var jonas = "verliebt"
+input password -> "Enter the password:"
 
-var fileToRun = "./Test.som"
-
-if india == jonas
-    print "India und Jonas sind verliebt"
-    run fileToRun
+if password == "password"
+    
+    print "Access granted"
     exit
+    
 break
 
-print "India und Jonas sind nicht verliebt"
+print "Access denied"

@@ -17,6 +17,7 @@ public class TokenManager
         AddToken(new IfToken());
         AddToken(new IfNotToken());
         AddToken(new VarToken());
+        AddToken(new InputToken());
     }
     
     public void AddToken(Token token)
@@ -49,7 +50,12 @@ public class TokenManager
             body = body.Trim();
             return foundMatches[0].Run(body, line, where);
         }
-
+        
+        if (string.IsNullOrWhiteSpace(body))
+        {
+            return true;
+        }
+        
         new SyntaxError().Throw("Unknown token", line, where);
         return false;
     }
